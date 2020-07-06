@@ -23,9 +23,7 @@ class GameScene: SKScene {
     var lastUpdateTime : TimeInterval?
     // create gravity
     let gravitySpeed : CGFloat = 1.5
-    
-    
-    
+        
     override func didMove(to view: SKView) {
         anchorPoint = CGPoint.zero
         //call setup and configure function
@@ -47,6 +45,7 @@ class GameScene: SKScene {
         let scrollAdjustment = CGFloat(elapsedTime / expectedElapsedTime)
         let currentScrollAmount = scrollSpeed * scrollAdjustment
         updateBricks(withScrollAmount: currentScrollAmount)
+        updateSkater()
     }
     //configure tapGesture
     @objc func handleTap(tapGesture: UITapGestureRecognizer) {
@@ -115,15 +114,19 @@ class GameScene: SKScene {
             farthestRightBrickX = newBrick.position.x
         }
     }
-    //configure update skater on screen
+    //configure update skater on screen - jump and down
     func updateSkater() {
         if !skater.isOnGroud {
             let velocityY = skater.velocity.y - gravitySpeed
             skater.velocity = CGPoint(x: skater.velocity.x, y: velocityY)
             let newSkaterY = skater.position.y + skater.velocity.y
             skater.position = CGPoint(x: skater.position.x, y: newSkaterY)
+            if skater.position.y < skater.minimumY {
+                skater.position.y = skater.minimumY
+                skater.velocity = CGPoint.zero
+                skater.isOnGroud = true
+            }
         }
     }
-    
 }
 
