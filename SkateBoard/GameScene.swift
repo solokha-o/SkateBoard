@@ -26,8 +26,10 @@ class GameScene: SKScene {
         
     override func didMove(to view: SKView) {
         anchorPoint = CGPoint.zero
+        physicsWorld.gravity = CGVector(dx: 0.0, dy: -6.0)
         //call setup and configure function
         setupBackground()
+        skater.setupPhysicsBody()
         resetSkater()
         // add tapGesture to scene
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(GameScene.handleTap(tapGesture:)))
@@ -79,6 +81,9 @@ class GameScene: SKScene {
         addChild(brick)
         brickSize = brick.size
         bricks.append(brick)
+        let center = brick.centerRect.origin
+        brick.physicsBody = SKPhysicsBody(rectangleOf: brick.size, center: center)
+        brick.physicsBody?.affectedByGravity = false
         return brick
     }
     //configure building road from bricks
