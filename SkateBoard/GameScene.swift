@@ -8,6 +8,12 @@
 
 import SpriteKit
 import GameplayKit
+//get physics category to objects of game
+struct PhysicsCategory {
+   static let skater : UInt32 = 0x1 << 0
+   static let brick : UInt32 = 0x1 << 1
+   static let gem : UInt32 = 0x1 << 2
+}
 
 class GameScene: SKScene {
     
@@ -84,6 +90,8 @@ class GameScene: SKScene {
         let center = brick.centerRect.origin
         brick.physicsBody = SKPhysicsBody(rectangleOf: brick.size, center: center)
         brick.physicsBody?.affectedByGravity = false
+        brick.physicsBody?.categoryBitMask = PhysicsCategory.brick
+        brick.physicsBody?.collisionBitMask = 0
         return brick
     }
     //configure building road from bricks
