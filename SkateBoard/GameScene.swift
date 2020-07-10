@@ -15,7 +15,7 @@ struct PhysicsCategory {
    static let gem : UInt32 = 0x1 << 2
 }
 
-class GameScene: SKScene {
+class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //create instance of Skater
     let skater = Skater(imageNamed: "skater")
@@ -33,6 +33,8 @@ class GameScene: SKScene {
     override func didMove(to view: SKView) {
         anchorPoint = CGPoint.zero
         physicsWorld.gravity = CGVector(dx: 0.0, dy: -6.0)
+        // add contact delegate
+        physicsWorld.contactDelegate = self
         //call setup and configure function
         setupBackground()
         skater.setupPhysicsBody()
@@ -58,8 +60,13 @@ class GameScene: SKScene {
     //configure tapGesture
     @objc func handleTap(tapGesture: UITapGestureRecognizer) {
         if skater.isOnGroud {
-            skater.velocity = CGPoint(x: 0.0, y: skater.jumpSpeed)
-            skater.isOnGroud = false
+            skater.physicsBody?.applyImpulse(CGVector(dx: 0.0, dy: 260.0))
+        }
+    }
+    // MARK:- SKPhysicsContactDelegate Methods
+    func didBegin(_ contact: SKPhysicsContact) {
+        if contact.bodyA.categoryBitMask == PhysicsCategory.skater && contact.bodyB.categoryBitMask == PhysicsCategory.brick {
+            skater.isOnGroud = true
         }
     }
     //setup background image
