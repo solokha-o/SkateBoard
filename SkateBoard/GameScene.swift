@@ -25,6 +25,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var brickSize = CGSize.zero
     // bricks speed
     var scrollSpeed : CGFloat = 5.0
+    //create starting speed
+    let startingScrollSpeed : CGFloat = 5.0
     // create property for time interval update game
     var lastUpdateTime : TimeInterval?
     // create gravity
@@ -38,7 +40,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //call setup and configure function
         setupBackground()
         skater.setupPhysicsBody()
-        resetSkater()
+        startGame()
         // add tapGesture to scene
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(GameScene.handleTap(tapGesture:)))
         view.addGestureRecognizer(tapGesture)
@@ -85,6 +87,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         skater.zPosition = 10.0
         skater.minimumY = skaterY
         addChild(skater)
+    }
+    //configure start game
+    func startGame() {
+        resetSkater()
+        scrollSpeed = startingScrollSpeed
+        lastUpdateTime = nil
+        for brick in bricks {
+            brick.removeFromParent()
+        }
+        bricks.removeAll(keepingCapacity: true)
     }
     //configure brick
     func spawnBrick (atPosition position: CGPoint) -> SKSpriteNode {
