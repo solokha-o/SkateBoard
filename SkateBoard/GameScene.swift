@@ -10,12 +10,18 @@ import SpriteKit
 import GameplayKit
 //get physics category to objects of game
 struct PhysicsCategory {
-   static let skater : UInt32 = 0x1 << 0
-   static let brick : UInt32 = 0x1 << 1
-   static let gem : UInt32 = 0x1 << 2
+    static let skater : UInt32 = 0x1 << 0
+    static let brick : UInt32 = 0x1 << 1
+    static let gem : UInt32 = 0x1 << 2
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
+    
+    //create enum of brick level
+    enum BrickLevel: CGFloat {
+        case low = 0.0
+        case high = 100.0
+    }
     
     //create instance of Skater
     let skater = Skater(imageNamed: "skater")
@@ -31,7 +37,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var lastUpdateTime : TimeInterval?
     // create gravity
     let gravitySpeed : CGFloat = 1.5
-        
+    // create instance of brick level
+    var brickLevel = BrickLevel.low
+    
     override func didMove(to view: SKView) {
         physicsWorld.gravity = CGVector(dx: 0.0, dy: -6.0)
         // add contact delegate
@@ -46,8 +54,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         view.addGestureRecognizer(tapGesture)
         startGame()
     }
-    
+   
     override func update(_ currentTime: TimeInterval) {
+        //boost speed
+        scrollSpeed += 0.01
         // configure time update animation
         var elapsedTime : TimeInterval = 0.0
         if let lastTimeStamp = lastUpdateTime {
@@ -95,6 +105,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func startGame() {
         resetSkater()
         scrollSpeed = startingScrollSpeed
+        brickLevel = .low
         lastUpdateTime = nil
         for brick in bricks {
             brick.removeFromParent()
@@ -139,15 +150,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
             }
         }
-        // create new brick
+        // create new brick with bricl level
         while farthestRightBrickX < frame.width {
             var brickX = farthestRightBrickX + brickSize.width + 1.0
-            let brickY = brickSize.height / 2.0
+            let brickY = brickSize.height / 2.0 + brickLevel.rawValue
             //create hole in brick
             let rundomNumber = arc4random_uniform(99)
             if rundomNumber < 5 {
                 let gap = 20.0 * scrollSpeed
                 brickX += gap
+            }
+            else if rundomNumber < 10 {
+                if brickLevel == .high {
+                    brickLevel = .low
+                }
+                else if brickLevel == .low {
+                    brickLevel = .high
+                }
             }
             let newBrick = spawnBrick(atPosition: CGPoint(x: brickX, y: brickY))
             farthestRightBrickX = newBrick.position.x
