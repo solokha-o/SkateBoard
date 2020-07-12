@@ -33,17 +33,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let gravitySpeed : CGFloat = 1.5
         
     override func didMove(to view: SKView) {
-        anchorPoint = CGPoint.zero
         physicsWorld.gravity = CGVector(dx: 0.0, dy: -6.0)
         // add contact delegate
         physicsWorld.contactDelegate = self
+        anchorPoint = CGPoint.zero
         //call setup and configure function
         setupBackground()
         skater.setupPhysicsBody()
-        startGame()
+        addChild(skater)
         // add tapGesture to scene
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(GameScene.handleTap(tapGesture:)))
         view.addGestureRecognizer(tapGesture)
+        startGame()
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -86,7 +87,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         skater.position = CGPoint(x: skaterX, y: skaterY)
         skater.zPosition = 10.0
         skater.minimumY = skaterY
-        addChild(skater)
+        skater.zPosition = 0.0
+        skater.physicsBody?.velocity = CGVector(dx: 0.0, dy: 0.0)
+        skater.physicsBody?.angularVelocity = 0.0
     }
     //configure start game
     func startGame() {
@@ -97,6 +100,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             brick.removeFromParent()
         }
         bricks.removeAll(keepingCapacity: true)
+    }
+    // configure game over
+    func gameOver() {
+        startGame()
     }
     //configure brick
     func spawnBrick (atPosition position: CGPoint) -> SKSpriteNode {
@@ -148,16 +155,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     //configure update skater on screen - jump and down
     func updateSkater() {
-        if !skater.isOnGroud {
-            let velocityY = skater.velocity.y - gravitySpeed
-            skater.velocity = CGPoint(x: skater.velocity.x, y: velocityY)
-            let newSkaterY = skater.position.y + skater.velocity.y
-            skater.position = CGPoint(x: skater.position.x, y: newSkaterY)
-            if skater.position.y < skater.minimumY {
-                skater.position.y = skater.minimumY
-                skater.velocity = CGPoint.zero
-                skater.isOnGroud = true
+        if let velocityY = skater.physicsBody?.velocity.dy {
+            if velocityY < -100.0 || velocityY > 100.0 {
+                skater.isOnGroud = false
             }
+        }
+        let isOffScreen = skater.position.y < 0.0 || skater.position.x < 0.0
+        let maxRotation = CGFloat(GLKMathDegreesToRadians(85.0))
+        let isTippedOver = skater.zRotation > maxRotation || skater.zRotation < -maxRotation
+        if isOffScreen || isTippedOver {
+            gameOver()
         }
     }
 }
