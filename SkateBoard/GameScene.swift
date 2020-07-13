@@ -39,6 +39,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let gravitySpeed : CGFloat = 1.5
     // create instance of brick level
     var brickLevel = BrickLevel.low
+    // create array of gems
+    var gems = [SKSpriteNode]()
     
     override func didMove(to view: SKView) {
         physicsWorld.gravity = CGVector(dx: 0.0, dy: -6.0)
@@ -130,6 +132,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         brick.physicsBody?.categoryBitMask = PhysicsCategory.brick
         brick.physicsBody?.collisionBitMask = 0
         return brick
+    }
+    //configure gem
+    func spawnGem(atPosition position: CGPoint) {
+        let gem = SKSpriteNode(imageNamed: "gem")
+        gem.position = position
+        gem.zPosition = 9
+        addChild(gem)
+        gem.physicsBody = SKPhysicsBody(rectangleOf: gem.size, center: gem.centerRect.origin)
+        gem.physicsBody?.categoryBitMask = PhysicsCategory.gem
+        gem.physicsBody?.affectedByGravity = false
+        gems.append(gem)
     }
     //configure building road from bricks
     func updateBricks(withScrollAmount currentScrollAmount: CGFloat) {
