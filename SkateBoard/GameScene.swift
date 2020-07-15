@@ -69,8 +69,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let expectedElapsedTime : TimeInterval = 1.0 / 60.0
         let scrollAdjustment = CGFloat(elapsedTime / expectedElapsedTime)
         let currentScrollAmount = scrollSpeed * scrollAdjustment
+        // call function update node by currentScrollAmount
         updateBricks(withScrollAmount: currentScrollAmount)
         updateSkater()
+        updateGem(withScrollAmount: currentScrollAmount)
     }
     //configure tapGesture
     @objc func handleTap(tapGesture: UITapGestureRecognizer) {
@@ -82,6 +84,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func didBegin(_ contact: SKPhysicsContact) {
         if contact.bodyA.categoryBitMask == PhysicsCategory.skater && contact.bodyB.categoryBitMask == PhysicsCategory.brick {
             skater.isOnGroud = true
+        }
+        else if contact.bodyA.categoryBitMask == PhysicsCategory.skater && contact.bodyB.categoryBitMask == PhysicsCategory.gem {
+            if let gem = contact.bodyB.node as? SKSpriteNode {
+                removeGem(gem)
+            }
         }
     }
     //setup background image
@@ -113,6 +120,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             brick.removeFromParent()
         }
         bricks.removeAll(keepingCapacity: true)
+        for gem in gems {
+            removeGem(gem)
+        }
     }
     // configure game over
     func gameOver() {
@@ -144,6 +154,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         gem.physicsBody?.affectedByGravity = false
         gems.append(gem)
     }
+    //configure remove gem
+    func removeGem (_ gem: SKSpriteNode) {
+        gem.removeFromParent()
+        if let gemIndex = gems.firstIndex(of: gem) {
+            gems.remove(at: gemIndex)
+        }
+    }
     //configure building road from bricks
     func updateBricks(withScrollAmount currentScrollAmount: CGFloat) {
         // position of first brick
@@ -172,6 +189,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if rundomNumber < 5 {
                 let gap = 20.0 * scrollSpeed
                 brickX += gap
+                // create gem where gap
+                let randomGemYamount = CGFloat(arc4random_uniform(150))
+                let newGemY = brickY + skater.size.height + randomGemYamount
+                let newGemX = brickX - gap / 2.0
+                spawnGem(atPosition: CGPoint(x: newGemX, y: newGemY))
             }
             else if rundomNumber < 10 {
                 if brickLevel == .high {
@@ -183,6 +205,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             let newBrick = spawnBrick(atPosition: CGPoint(x: brickX, y: brickY))
             farthestRightBrickX = newBrick.position.x
+        }
+    }
+    // configure update gems in scroll speed
+    func updateGem(withScrollAmount currentScrollAmount: CGFloat) {
+        for gem in gems {
+            let gemX = gem.position.x - currentScrollAmount
+            gem.position = CGPoint(x: gemX, y: gem.position.y)
+            if gem.position.x < 0.0 {
+                removeGem(gem)
+            }
         }
     }
     //configure update skater on screen - jump and down
