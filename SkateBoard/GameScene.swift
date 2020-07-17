@@ -49,6 +49,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         anchorPoint = CGPoint.zero
         //call setup and configure function
         setupBackground()
+        setupLabels()
         skater.setupPhysicsBody()
         addChild(skater)
         // add tapGesture to scene
@@ -109,6 +110,38 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         skater.zPosition = 0.0
         skater.physicsBody?.velocity = CGVector(dx: 0.0, dy: 0.0)
         skater.physicsBody?.angularVelocity = 0.0
+    }
+    //configure labels with points gamer and best resault
+    func setupLabels() {
+        let scoreTextLabel : SKLabelNode = SKLabelNode(text: "Points")
+        scoreTextLabel.position = CGPoint(x: 14.0, y: frame.size.height - 20.0)
+        scoreTextLabel.horizontalAlignmentMode = .left
+        scoreTextLabel.fontName = "Courier-Bold"
+        scoreTextLabel.fontSize = 14.0
+        scoreTextLabel.zPosition = 20
+        addChild(scoreTextLabel)
+        let scoreLabel: SKLabelNode = SKLabelNode(text: "0")
+        scoreLabel.position = CGPoint(x: 14.0, y: frame.size.height - 40.0)
+        scoreLabel.horizontalAlignmentMode = .left
+        scoreLabel.fontName = "Courier-Bold"
+        scoreLabel.fontSize = 18.0
+        scoreLabel.name = "scoreLabel"
+        scoreLabel.zPosition = 20
+        addChild(scoreLabel)
+        let highScoreTextLabel: SKLabelNode = SKLabelNode(text: "Best resault")
+        highScoreTextLabel.position = CGPoint(x: frame.size.width - 14.0, y: frame.size.height - 20.0)
+        highScoreTextLabel.horizontalAlignmentMode = .right
+        highScoreTextLabel.fontName = "Courier-Bold"; highScoreTextLabel.fontSize = 14.0
+        highScoreTextLabel.zPosition = 20
+        addChild(highScoreTextLabel)
+        let highScoreLabel: SKLabelNode = SKLabelNode(text: "0")
+        highScoreLabel.position = CGPoint(x: frame.size.width - 14.0, y: frame.size.height - 40.0)
+        highScoreLabel.horizontalAlignmentMode = .right
+        highScoreLabel.fontName = "Courier-Bold"
+        highScoreLabel.fontSize = 18.0
+        highScoreLabel.name = "highScoreLabel"
+        highScoreLabel.zPosition = 20
+        addChild(highScoreLabel)
     }
     //configure start game
     func startGame() {
