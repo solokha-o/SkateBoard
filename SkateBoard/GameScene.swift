@@ -157,6 +157,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             scoreLable.text = String(format: "%04d", score)
         }
     }
+    //configure update high score text in labels
+    func updateHighScoreTextLabel() {
+        if let highScoreLabel = childNode(withName: "highScoreLabel") as? SKLabelNode {
+            highScoreLabel.text = String(format: "%04d", highScoreLabel)
+        }
+    }
     //configure start game
     func startGame() {
         resetSkater()
@@ -174,6 +180,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     // configure game over
     func gameOver() {
+        if score > highScore {
+            highScore = score
+            updateHighScoreTextLabel()
+        }
         startGame()
     }
     //configure brick
@@ -228,13 +238,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
             }
         }
-        // create new brick with bricl level
+        // create new brick with brick level
         while farthestRightBrickX < frame.width {
             var brickX = farthestRightBrickX + brickSize.width + 1.0
             let brickY = brickSize.height / 2.0 + brickLevel.rawValue
             //create hole in brick
             let rundomNumber = arc4random_uniform(99)
-            if rundomNumber < 5 {
+            if rundomNumber < 2 && score > 10 {
                 let gap = 20.0 * scrollSpeed
                 brickX += gap
                 // create gem where gap
@@ -243,7 +253,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 let newGemX = brickX - gap / 2.0
                 spawnGem(atPosition: CGPoint(x: newGemX, y: newGemY))
             }
-            else if rundomNumber < 10 {
+            else if rundomNumber < 4 && score > 20 {
                 if brickLevel == .high {
                     brickLevel = .low
                 }
