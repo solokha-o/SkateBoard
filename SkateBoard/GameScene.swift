@@ -41,6 +41,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var brickLevel = BrickLevel.low
     // create array of gems
     var gems = [SKSpriteNode]()
+    //create instance score and best score
+    var score = 0
+    var highScore = 0
+    var lastScoreUpdateTime : TimeInterval = 0.0
     
     override func didMove(to view: SKView) {
         physicsWorld.gravity = CGVector(dx: 0.0, dy: -6.0)
@@ -74,6 +78,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         updateBricks(withScrollAmount: currentScrollAmount)
         updateSkater()
         updateGem(withScrollAmount: currentScrollAmount)
+        //call function update node by currentTime
+        updateScore(withCurrentTime: currentTime)
     }
     //configure tapGesture
     @objc func handleTap(tapGesture: UITapGestureRecognizer) {
@@ -89,6 +95,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         else if contact.bodyA.categoryBitMask == PhysicsCategory.skater && contact.bodyB.categoryBitMask == PhysicsCategory.gem {
             if let gem = contact.bodyB.node as? SKSpriteNode {
                 removeGem(gem)
+                score += 50
+                updateScoreTextLable()
             }
         }
     }
@@ -143,9 +151,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         highScoreLabel.zPosition = 20
         addChild(highScoreLabel)
     }
+    //configure update score text in labels
+    func updateScoreTextLable() {
+        if let scoreLable = childNode(withName: "scoreLabel") as? SKLabelNode {
+            scoreLable.text = String(format: "%04d", score)
+        }
+    }
     //configure start game
     func startGame() {
         resetSkater()
+        score = 0
         scrollSpeed = startingScrollSpeed
         brickLevel = .low
         lastUpdateTime = nil
@@ -248,6 +263,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if gem.position.x < 0.0 {
                 removeGem(gem)
             }
+        }
+    }
+    // configure update score
+    func updateScore(withCurrentTime currentTime: TimeInterval) {
+        let elapsedTime = currentTime - lastScoreUpdateTime
+        if elapsedTime > 1.0 {
+            score += Int(scrollSpeed)
+            lastScoreUpdateTime = currentTime
+            updateScoreTextLable()
         }
     }
     //configure update skater on screen - jump and down
