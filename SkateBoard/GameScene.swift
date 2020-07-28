@@ -22,6 +22,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         case low = 0.0
         case high = 100.0
     }
+    //create enum state of game
+    enum StateGame {
+        case notRunning
+        case running
+    }
     
     //create instance of Skater
     let skater = Skater(imageNamed: "skater")
@@ -45,6 +50,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var score = 0
     var highScore = 0
     var lastScoreUpdateTime : TimeInterval = 0.0
+    //create state of game
+    var stateGame = StateGame.notRunning
     
     override func didMove(to view: SKView) {
         physicsWorld.gravity = CGVector(dx: 0.0, dy: -6.0)
@@ -165,6 +172,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     //configure start game
     func startGame() {
+        stateGame = .running
         resetSkater()
         score = 0
         scrollSpeed = startingScrollSpeed
@@ -180,6 +188,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     // configure game over
     func gameOver() {
+        stateGame = .notRunning
         if score > highScore {
             highScore = score
             updateHighScoreTextLabel()
