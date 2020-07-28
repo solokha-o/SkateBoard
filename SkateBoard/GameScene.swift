@@ -197,7 +197,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             highScore = score
             updateHighScoreTextLabel()
         }
-        startGame()
     }
     //configure brick
     func spawnBrick (atPosition position: CGPoint) -> SKSpriteNode {
