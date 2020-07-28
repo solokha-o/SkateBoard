@@ -21,5 +21,9 @@ class MenuLayer: SKSpriteNode {
         messageLable.fontSize = 48.0
         messageLable.zPosition = 20
         addChild(messageLable)
+        //animate text message
+        let finalX = frame.width / 2.0
+        let messageAction = SKAction.moveTo(x: finalX, duration: 0.3)
+        messageLable.run(messageAction)
     }
 }
