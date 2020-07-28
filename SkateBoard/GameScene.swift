@@ -70,6 +70,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
    
     override func update(_ currentTime: TimeInterval) {
+        // break game
+        if stateGame != .running {
+            return
+        }
         //boost speed
         scrollSpeed += 0.01
         // configure time update animation
