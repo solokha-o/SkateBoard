@@ -192,11 +192,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     // configure game over
     func gameOver() {
-        stateGame = .notRunning
         if score > highScore {
             highScore = score
             updateHighScoreTextLabel()
         }
+        stateGame = .notRunning
     }
     //configure brick
     func spawnBrick (atPosition position: CGPoint) -> SKSpriteNode {

@@ -12,6 +12,7 @@ import SpriteKit
 class MenuLayer: SKSpriteNode {
     //on display info about state of game and resault
     func display(message: String, score: Int?) {
+        // display message about state of game
         let messageLable = SKLabelNode(text: message)
         let messageX = -frame.width
         let messageY = frame.height / 2.0
@@ -25,5 +26,20 @@ class MenuLayer: SKSpriteNode {
         let finalX = frame.width / 2.0
         let messageAction = SKAction.moveTo(x: finalX, duration: 0.3)
         messageLable.run(messageAction)
+        //display score of game
+        if let scoreToDisplay = score {
+            let scoreString = String(format: "Score: %04d", scoreToDisplay)
+            let scoreLabel = SKLabelNode(text: scoreString)
+            let scoreLabelX = frame.width
+            let scoreLabelY = messageLable.position.y - messageLable.frame.height
+            scoreLabel.position = CGPoint(x: scoreLabelX, y: scoreLabelY)
+            scoreLabel.horizontalAlignmentMode = .center
+            scoreLabel.fontName = "Courier-Bold"
+            scoreLabel.fontSize = 32.0
+            scoreLabel.zPosition = 20
+            addChild(scoreLabel)
+            let scoreAction = SKAction.moveTo(x: finalX, duration: 0.3)
+            scoreLabel.run(scoreAction)
+        }
     }
 }
