@@ -171,7 +171,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //configure update high score text in labels
     func updateHighScoreTextLabel() {
         if let highScoreLabel = childNode(withName: "highScoreLabel") as? SKLabelNode {
-            highScoreLabel.text = String(format: "%04d", highScoreLabel)
+            highScoreLabel.text = String(format: "%04d", highScore)
         }
     }
     //configure start game
