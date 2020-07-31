@@ -66,9 +66,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // add tapGesture to scene
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(GameScene.handleTap(tapGesture:)))
         view.addGestureRecognizer(tapGesture)
-        startGame()
+        //display start game menu
+        let menuBackgroundColor = UIColor.black.withAlphaComponent(0.4)
+        let menuLayer = MenuLayer(color: menuBackgroundColor, size: frame.size)
+        menuLayer.anchorPoint = CGPoint(x: 0, y: 0)
+        menuLayer.position = CGPoint(x: 0, y: 0)
+        menuLayer.zPosition = 30
+        menuLayer.name = "menuLayer"
+        menuLayer.display(message: "Press to Start game", score: nil)
+        addChild(menuLayer)
     }
-   
+    
     override func update(_ currentTime: TimeInterval) {
         // break game
         if stateGame != .running {
@@ -94,8 +102,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     //configure tapGesture
     @objc func handleTap(tapGesture: UITapGestureRecognizer) {
-        if skater.isOnGroud {
-            skater.physicsBody?.applyImpulse(CGVector(dx: 0.0, dy: 260.0))
+        if stateGame == .running {
+            if skater.isOnGroud {
+                skater.physicsBody?.applyImpulse(CGVector(dx: 0.0, dy: 260.0))
+            }
+        } else {
+            if let menuLayer: SKSpriteNode = childNode(withName: "menuLayer") as? SKSpriteNode {
+                menuLayer.removeFromParent()
+                startGame()
+            }
         }
     }
     // MARK:- SKPhysicsContactDelegate Methods
@@ -196,6 +211,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             highScore = score
             updateHighScoreTextLabel()
         }
+        //display game over menu
+        let menuBackgroundColor = UIColor.black.withAlphaComponent(0.4)
+        let menuLayer = MenuLayer(color: menuBackgroundColor, size: frame.size)
+        menuLayer.anchorPoint = CGPoint(x: 0, y: 0)
+        menuLayer.position = CGPoint(x: 0, y: 0)
+        menuLayer.zPosition = 30
+        menuLayer.name = "menuLayer"
+        menuLayer.display(message: "Game over!", score: score)
+        addChild(menuLayer)
         stateGame = .notRunning
     }
     //configure brick
