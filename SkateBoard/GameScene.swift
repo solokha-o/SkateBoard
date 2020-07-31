@@ -105,6 +105,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if stateGame == .running {
             if skater.isOnGroud {
                 skater.physicsBody?.applyImpulse(CGVector(dx: 0.0, dy: 260.0))
+                // sound when skater jump
+                run(SKAction.playSoundFileNamed("jump.wav", waitForCompletion: false))
             }
         } else {
             if let menuLayer: SKSpriteNode = childNode(withName: "menuLayer") as? SKSpriteNode {
@@ -122,6 +124,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if let gem = contact.bodyB.node as? SKSpriteNode {
                 removeGem(gem)
                 score += 50
+                //sound when take gem
+                run(SKAction.playSoundFileNamed("gem.wav", waitForCompletion: false))
                 updateScoreTextLable()
             }
         }

@@ -17,6 +17,8 @@
 		DB38161924A76D890052DFF6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB38161724A76D890052DFF6 /* LaunchScreen.storyboard */; };
 		DB38162124ABA6840052DFF6 /* Skater.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB38162024ABA6840052DFF6 /* Skater.swift */; };
 		DBFF796224D07002001D6853 /* MenuLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFF796124D07002001D6853 /* MenuLayer.swift */; };
+		DBFF796724D45F1B001D6853 /* gem.wav in Resources */ = {isa = PBXBuildFile; fileRef = DBFF796524D45F1A001D6853 /* gem.wav */; };
+		DBFF796824D45F1B001D6853 /* jump.wav in Resources */ = {isa = PBXBuildFile; fileRef = DBFF796624D45F1A001D6853 /* jump.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		DB38161A24A76D890052DFF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB38162024ABA6840052DFF6 /* Skater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Skater.swift; sourceTree = "<group>"; };
 		DBFF796124D07002001D6853 /* MenuLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuLayer.swift; sourceTree = "<group>"; };
+		DBFF796524D45F1A001D6853 /* gem.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = gem.wav; sourceTree = "<group>"; };
+		DBFF796624D45F1A001D6853 /* jump.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = jump.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +77,8 @@
 				DB38162024ABA6840052DFF6 /* Skater.swift */,
 				DB38161224A76D800052DFF6 /* Main.storyboard */,
 				DB38161524A76D890052DFF6 /* Assets.xcassets */,
+				DBFF796524D45F1A001D6853 /* gem.wav */,
+				DBFF796624D45F1A001D6853 /* jump.wav */,
 				DB38161724A76D890052DFF6 /* LaunchScreen.storyboard */,
 				DB38161A24A76D890052DFF6 /* Info.plist */,
 			);
@@ -137,8 +143,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBFF796724D45F1B001D6853 /* gem.wav in Resources */,
 				DB38161424A76D800052DFF6 /* Main.storyboard in Resources */,
 				DB38160B24A76D800052DFF6 /* GameScene.sks in Resources */,
+				DBFF796824D45F1B001D6853 /* jump.wav in Resources */,
 				DB38161624A76D890052DFF6 /* Assets.xcassets in Resources */,
 				DB38161924A76D890052DFF6 /* LaunchScreen.storyboard in Resources */,
 				DB38160D24A76D800052DFF6 /* Actions.sks in Resources */,
