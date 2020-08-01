@@ -27,4 +27,13 @@ class Skater: SKSpriteNode {
             physicsBody?.contactTestBitMask = PhysicsCategory.brick | PhysicsCategory.gem
         }
     }
+    //create sparks when skater run
+    func createSparks() {
+        let bundle = Bundle.main
+        if let sparksPath = bundle.path(forResource: "sparks", ofType: "sks") {
+            let sparksNode = NSKeyedUnarchiver.unarchiveObject(withFile: sparksPath) as! SKEmitterNode
+            sparksNode.position = CGPoint(x: 0.0, y: -50.0)
+            addChild(sparksNode)
+        }
+    }
 }
