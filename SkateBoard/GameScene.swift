@@ -118,6 +118,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // MARK:- SKPhysicsContactDelegate Methods
     func didBegin(_ contact: SKPhysicsContact) {
         if contact.bodyA.categoryBitMask == PhysicsCategory.skater && contact.bodyB.categoryBitMask == PhysicsCategory.brick {
+            if let velocityY = skater.physicsBody?.velocity.dy {
+                if !skater.isOnGroud && velocityY < 100.0 {
+                    skater.createSparks()
+                }
+            }
             skater.isOnGroud = true
         }
         else if contact.bodyA.categoryBitMask == PhysicsCategory.skater && contact.bodyB.categoryBitMask == PhysicsCategory.gem {
