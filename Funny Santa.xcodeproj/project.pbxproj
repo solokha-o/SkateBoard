@@ -23,7 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		DB38160524A76D800052DFF6 /* SkateBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SkateBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB38160524A76D800052DFF6 /* Funny Santa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Funny Santa.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB38160824A76D800052DFF6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DB38160A24A76D800052DFF6 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		DB38160C24A76D800052DFF6 /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
@@ -54,7 +54,7 @@
 		DB3815FC24A76D800052DFF6 = {
 			isa = PBXGroup;
 			children = (
-				DB38160724A76D800052DFF6 /* SkateBoard */,
+				DB38160724A76D800052DFF6 /* FunnySanta */,
 				DB38160624A76D800052DFF6 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -62,12 +62,12 @@
 		DB38160624A76D800052DFF6 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DB38160524A76D800052DFF6 /* SkateBoard.app */,
+				DB38160524A76D800052DFF6 /* Funny Santa.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		DB38160724A76D800052DFF6 /* SkateBoard */ = {
+		DB38160724A76D800052DFF6 /* FunnySanta */ = {
 			isa = PBXGroup;
 			children = (
 				DB38160824A76D800052DFF6 /* AppDelegate.swift */,
@@ -85,15 +85,15 @@
 				DB38161724A76D890052DFF6 /* LaunchScreen.storyboard */,
 				DB38161A24A76D890052DFF6 /* Info.plist */,
 			);
-			path = SkateBoard;
+			path = FunnySanta;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		DB38160424A76D800052DFF6 /* SkateBoard */ = {
+		DB38160424A76D800052DFF6 /* Funny Santa */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DB38161D24A76D890052DFF6 /* Build configuration list for PBXNativeTarget "SkateBoard" */;
+			buildConfigurationList = DB38161D24A76D890052DFF6 /* Build configuration list for PBXNativeTarget "Funny Santa" */;
 			buildPhases = (
 				DB38160124A76D800052DFF6 /* Sources */,
 				DB38160224A76D800052DFF6 /* Frameworks */,
@@ -103,9 +103,9 @@
 			);
 			dependencies = (
 			);
-			name = SkateBoard;
+			name = "Funny Santa";
 			productName = SkateBoard;
-			productReference = DB38160524A76D800052DFF6 /* SkateBoard.app */;
+			productReference = DB38160524A76D800052DFF6 /* Funny Santa.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -123,7 +123,7 @@
 					};
 				};
 			};
-			buildConfigurationList = DB38160024A76D800052DFF6 /* Build configuration list for PBXProject "SkateBoard" */;
+			buildConfigurationList = DB38160024A76D800052DFF6 /* Build configuration list for PBXProject "Funny Santa" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -136,7 +136,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				DB38160424A76D800052DFF6 /* SkateBoard */,
+				DB38160424A76D800052DFF6 /* Funny Santa */,
 			);
 		};
 /* End PBXProject section */
@@ -244,7 +244,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -298,7 +298,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -319,8 +319,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Oleksandr-Solokha.SkateBoard";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "Oleksandr-Solokha.Funny-Santa";
+				PRODUCT_NAME = "Funny Santa";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -337,8 +337,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Oleksandr-Solokha.SkateBoard";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "Oleksandr-Solokha.Funny-Santa";
+				PRODUCT_NAME = "Funny Santa";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -347,7 +347,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		DB38160024A76D800052DFF6 /* Build configuration list for PBXProject "SkateBoard" */ = {
+		DB38160024A76D800052DFF6 /* Build configuration list for PBXProject "Funny Santa" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DB38161B24A76D890052DFF6 /* Debug */,
@@ -356,7 +356,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DB38161D24A76D890052DFF6 /* Build configuration list for PBXNativeTarget "SkateBoard" */ = {
+		DB38161D24A76D890052DFF6 /* Build configuration list for PBXNativeTarget "Funny Santa" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DB38161E24A76D890052DFF6 /* Debug */,

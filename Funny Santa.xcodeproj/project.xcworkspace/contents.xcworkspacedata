@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:SkateBoard.xcodeproj">
+      location = "self:/Users/oleksandrsolokha/Desktop/Swift/SkateBoard/Funny Santa.xcodeproj">
    </FileRef>
 </Workspace>
