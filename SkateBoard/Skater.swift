@@ -29,9 +29,7 @@ class Skater: SKSpriteNode {
     }
     //create sparks when skater run
     func createSparks() {
-        let bundle = Bundle.main
-        if let sparksPath = bundle.path(forResource: "sparks", ofType: "sks") {
-            let sparksNode = NSKeyedUnarchiver.unarchiveObject(withFile: sparksPath) as! SKEmitterNode
+        if let sparksNode = SKEmitterNode(fileNamed: "sparks") {
             sparksNode.position = CGPoint(x: 0.0, y: -50.0)
             addChild(sparksNode)
             let waitAction = SKAction.wait(forDuration: 0.5)
