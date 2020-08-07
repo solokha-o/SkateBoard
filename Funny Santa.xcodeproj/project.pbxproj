@@ -15,7 +15,7 @@
 		DB38161424A76D800052DFF6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB38161224A76D800052DFF6 /* Main.storyboard */; };
 		DB38161624A76D890052DFF6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB38161524A76D890052DFF6 /* Assets.xcassets */; };
 		DB38161924A76D890052DFF6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB38161724A76D890052DFF6 /* LaunchScreen.storyboard */; };
-		DB38162124ABA6840052DFF6 /* Skater.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB38162024ABA6840052DFF6 /* Skater.swift */; };
+		DB38162124ABA6840052DFF6 /* Santa.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB38162024ABA6840052DFF6 /* Santa.swift */; };
 		DBFF796224D07002001D6853 /* MenuLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFF796124D07002001D6853 /* MenuLayer.swift */; };
 		DBFF796724D45F1B001D6853 /* gem.wav in Resources */ = {isa = PBXBuildFile; fileRef = DBFF796524D45F1A001D6853 /* gem.wav */; };
 		DBFF796824D45F1B001D6853 /* jump.wav in Resources */ = {isa = PBXBuildFile; fileRef = DBFF796624D45F1A001D6853 /* jump.wav */; };
@@ -33,7 +33,7 @@
 		DB38161524A76D890052DFF6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DB38161824A76D890052DFF6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DB38161A24A76D890052DFF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DB38162024ABA6840052DFF6 /* Skater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Skater.swift; sourceTree = "<group>"; };
+		DB38162024ABA6840052DFF6 /* Santa.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Santa.swift; sourceTree = "<group>"; };
 		DBFF796124D07002001D6853 /* MenuLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuLayer.swift; sourceTree = "<group>"; };
 		DBFF796524D45F1A001D6853 /* gem.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = gem.wav; sourceTree = "<group>"; };
 		DBFF796624D45F1A001D6853 /* jump.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = jump.wav; sourceTree = "<group>"; };
@@ -77,7 +77,7 @@
 				DBFF796924D549CE001D6853 /* sparks.sks */,
 				DBFF796124D07002001D6853 /* MenuLayer.swift */,
 				DB38161024A76D800052DFF6 /* GameViewController.swift */,
-				DB38162024ABA6840052DFF6 /* Skater.swift */,
+				DB38162024ABA6840052DFF6 /* Santa.swift */,
 				DB38161224A76D800052DFF6 /* Main.storyboard */,
 				DB38161524A76D890052DFF6 /* Assets.xcassets */,
 				DBFF796524D45F1A001D6853 /* gem.wav */,
@@ -165,7 +165,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB38160F24A76D800052DFF6 /* GameScene.swift in Sources */,
-				DB38162124ABA6840052DFF6 /* Skater.swift in Sources */,
+				DB38162124ABA6840052DFF6 /* Santa.swift in Sources */,
 				DBFF796224D07002001D6853 /* MenuLayer.swift in Sources */,
 				DB38161124A76D800052DFF6 /* GameViewController.swift in Sources */,
 				DB38160924A76D800052DFF6 /* AppDelegate.swift in Sources */,
@@ -314,7 +314,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = X8NNCQ3HW6;
-				INFOPLIST_FILE = SkateBoard/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/FunnySanta/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -332,7 +332,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = X8NNCQ3HW6;
-				INFOPLIST_FILE = SkateBoard/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/FunnySanta/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

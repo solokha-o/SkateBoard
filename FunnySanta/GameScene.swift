@@ -10,7 +10,7 @@ import SpriteKit
 import GameplayKit
 //get physics category to objects of game
 struct PhysicsCategory {
-    static let skater : UInt32 = 0x1 << 0
+    static let santa : UInt32 = 0x1 << 0
     static let brick : UInt32 = 0x1 << 1
     static let gem : UInt32 = 0x1 << 2
 }
@@ -27,9 +27,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         case notRunning
         case running
     }
+    //create instance of Santa
+    let santa = Santa()
+    var santaWalkingFrames : [SKTexture] = []
     
-    //create instance of Skater
-    let skater = Skater(imageNamed: "skater")
+    
+    
+    
+    
+    
+    
+    
     //create array bricks
     var bricks = [SKSpriteNode]()
     //brick size on road
@@ -61,8 +69,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //call setup and configure function
         setupBackground()
         setupLabels()
-        skater.setupPhysicsBody()
-        addChild(skater)
+        santa.setupPhysicsBody()
+        addChild(santa)
         // add tapGesture to scene
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(GameScene.handleTap(tapGesture:)))
         view.addGestureRecognizer(tapGesture)
@@ -95,7 +103,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let currentScrollAmount = scrollSpeed * scrollAdjustment
         // call function update node by currentScrollAmount
         updateBricks(withScrollAmount: currentScrollAmount)
-        updateSkater()
+        updateSanta()
         updateGem(withScrollAmount: currentScrollAmount)
         //call function update node by currentTime
         updateScore(withCurrentTime: currentTime)
@@ -103,9 +111,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //configure tapGesture
     @objc func handleTap(tapGesture: UITapGestureRecognizer) {
         if stateGame == .running {
-            if skater.isOnGroud {
-                skater.physicsBody?.applyImpulse(CGVector(dx: 0.0, dy: 260.0))
-                // sound when skater jump
+            if santa.isOnGroud {
+                santa.physicsBody?.applyImpulse(CGVector(dx: 0.0, dy: 260.0))
+                // sound when santa jump
                 run(SKAction.playSoundFileNamed("jump.wav", waitForCompletion: false))
             }
         } else {
@@ -117,15 +125,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     // MARK:- SKPhysicsContactDelegate Methods
     func didBegin(_ contact: SKPhysicsContact) {
-        if contact.bodyA.categoryBitMask == PhysicsCategory.skater && contact.bodyB.categoryBitMask == PhysicsCategory.brick {
-            if let velocityY = skater.physicsBody?.velocity.dy {
-                if !skater.isOnGroud && velocityY < 100.0 {
-                    skater.createSparks()
+        if contact.bodyA.categoryBitMask == PhysicsCategory.santa && contact.bodyB.categoryBitMask == PhysicsCategory.brick {
+            if let velocityY = santa.physicsBody?.velocity.dy {
+                if !santa.isOnGroud && velocityY < 100.0 {
+                    santa.createSparks()
                 }
             }
-            skater.isOnGroud = true
+            santa.isOnGroud = true
         }
-        else if contact.bodyA.categoryBitMask == PhysicsCategory.skater && contact.bodyB.categoryBitMask == PhysicsCategory.gem {
+        else if contact.bodyA.categoryBitMask == PhysicsCategory.santa && contact.bodyB.categoryBitMask == PhysicsCategory.gem {
             if let gem = contact.bodyB.node as? SKSpriteNode {
                 removeGem(gem)
                 score += 50
@@ -135,6 +143,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
     }
+    //
+    func buildSanta() {
+        
+    }
     //setup background image
     func setupBackground() {
         let background = SKSpriteNode(imageNamed: "background")
@@ -143,16 +155,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         background.position = CGPoint(x: xMid, y: yMid)
         addChild(background)
     }
-    //setup skater on scene
-    func resetSkater() {
-        let skaterX = frame.midX / 2.0
-        let skaterY = skater.frame.height / 2.0 + 64.0
-        skater.position = CGPoint(x: skaterX, y: skaterY)
-        skater.zPosition = 10.0
-        skater.minimumY = skaterY
-        skater.zPosition = 0.0
-        skater.physicsBody?.velocity = CGVector(dx: 0.0, dy: 0.0)
-        skater.physicsBody?.angularVelocity = 0.0
+    //setup santa on scene
+    func resetSanta() {
+        let santaX = frame.midX / 2.0
+        let santaY = santa.frame.height / 2.0 + 64.0
+        santa.position = CGPoint(x: santaX, y: santaY)
+        santa.zPosition = 10.0
+        santa.minimumY = santaY
+        santa.zPosition = 0.0
+        santa.physicsBody?.velocity = CGVector(dx: 0.0, dy: 0.0)
+        santa.physicsBody?.angularVelocity = 0.0
     }
     //configure labels with points gamer and best resault
     func setupLabels() {
@@ -201,7 +213,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //configure start game
     func startGame() {
         stateGame = .running
-        resetSkater()
+        resetSanta()
         score = 0
         scrollSpeed = startingScrollSpeed
         brickLevel = .low
@@ -294,7 +306,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 brickX += gap
                 // create gem where gap
                 let randomGemYamount = CGFloat(arc4random_uniform(150))
-                let newGemY = brickY + skater.size.height + randomGemYamount
+                let newGemY = brickY + santa.size.height + randomGemYamount
                 let newGemX = brickX - gap / 2.0
                 spawnGem(atPosition: CGPoint(x: newGemX, y: newGemY))
             }
@@ -329,16 +341,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             updateScoreTextLable()
         }
     }
-    //configure update skater on screen - jump and down
-    func updateSkater() {
-        if let velocityY = skater.physicsBody?.velocity.dy {
+    //configure update santa on screen - jump and down
+    func updateSanta() {
+        if let velocityY = santa.physicsBody?.velocity.dy {
             if velocityY < -100.0 || velocityY > 100.0 {
-                skater.isOnGroud = false
+                santa.isOnGroud = false
             }
         }
-        let isOffScreen = skater.position.y < 0.0 || skater.position.x < 0.0
+        let isOffScreen = santa.position.y < 0.0 || santa.position.x < 0.0
         let maxRotation = CGFloat(GLKMathDegreesToRadians(85.0))
-        let isTippedOver = skater.zRotation > maxRotation || skater.zRotation < -maxRotation
+        let isTippedOver = santa.zRotation > maxRotation || santa.zRotation < -maxRotation
         if isOffScreen || isTippedOver {
             gameOver()
         }
