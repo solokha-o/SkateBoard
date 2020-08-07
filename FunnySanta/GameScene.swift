@@ -28,16 +28,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         case running
     }
     //create instance of Santa
-    let santa = Santa()
+    var santa = Santa()
+    //create SKTexture array for animate santa sprite
     var santaWalkingFrames : [SKTexture] = []
-    
-    
-    
-    
-    
-    
-    
-    
     //create array bricks
     var bricks = [SKSpriteNode]()
     //brick size on road
@@ -69,8 +62,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //call setup and configure function
         setupBackground()
         setupLabels()
-        santa.setupPhysicsBody()
-        addChild(santa)
+        buildSanta()
+        santaAnimate()
         // add tapGesture to scene
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(GameScene.handleTap(tapGesture:)))
         view.addGestureRecognizer(tapGesture)
@@ -143,9 +136,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
     }
-    //
+    // build frame santa on scene
     func buildSanta() {
-        
+        let santaAnimatedAtlas = SKTextureAtlas(named: "Santa")
+        var walkFrames: [SKTexture] = []
+        let numImages = santaAnimatedAtlas.textureNames.count
+        for i in 1...numImages {
+            let imageName = "Santa\(i)"
+            walkFrames.append(SKTexture(imageNamed: imageName))
+        }
+        santaWalkingFrames = walkFrames
+        let firstTextureFrame = santaWalkingFrames[0]
+        santa = Santa(texture: firstTextureFrame)
+        santa.setupPhysicsBody()
+        addChild(santa)
+    }
+    //animate walking santa
+    func santaAnimate() {
+        let santaWalkAnimate = SKAction.animate(with: santaWalkingFrames, timePerFrame: 0.1)
+        santa.run(SKAction.repeatForever(santaWalkAnimate))
     }
     //setup background image
     func setupBackground() {
